@@ -1,4 +1,10 @@
 #!/usr/bin/env ruby
+if ARGV.length < 1
+  puts 'usage: statusd <config file>'
+  exit 1
+end
+
 require 'server_status'
 
+set_config ARGV[0]
 ServerStatus.run!

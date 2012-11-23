@@ -7,6 +7,8 @@ source "http://rubygems.org"
 # Include everything needed to run rake, tests, features, etc.
 gem 'sinatra'
 gem 'slim'
+gem 'thin'
+gem 'settingslogic'
 
 group :development do
   gem "rspec"
