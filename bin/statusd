@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require 'server_status'
+
+ServerStatus.run!
