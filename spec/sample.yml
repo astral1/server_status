@@ -8,8 +8,7 @@ servers:
     apis:
       default: /
       details:
-        -
-          name: index
+        index:
           description: Index Page
           url: /
   google:
@@ -20,7 +19,6 @@ servers:
     apis:
       default: /deaddead
       details:
-        -
-          name: index
+        index:
           description: Index Page
           url: /

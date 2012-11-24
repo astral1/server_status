@@ -1,1 +1,17 @@
-.test Hello, World
+table.table.table-striped
+  thead
+    th.span1 Name
+    th.span9 Description
+    th.span2 API Status
+  tbody
+    - for status in @server_status do
+      - if status.code.eql? 200
+        tr.success
+          td = status.name
+          td = status.description
+          td = status.code
+      - else
+        tr.error
+          td = status.name
+          td = status.description
+          td = status.code

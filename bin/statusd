@@ -7,4 +7,4 @@ end
 require 'server_status'
 
 set_config ARGV[0]
-ServerStatus.run!
+ServerStatusApp.run!
