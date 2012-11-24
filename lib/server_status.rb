@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'slim'
 require 'server_status/config'
+require 'server_status/client'
 
 Slim::Engine.set_default_options pretty: true
 
@@ -18,6 +19,8 @@ class ServerStatus < Sinatra::Base
   end
 
   get '/:server/status' do
+    client = ServerStatusClient.new ServerStatusConfig.servers[params[:server].to_sym]
+    client.request.to_s
   end
 end
 

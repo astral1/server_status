@@ -1,7 +1,6 @@
 port: 4568
 servers:
-  -
-    name: naver
+  naver:
     domain: www.naver.com
     ssl: false
     description: Naver Portal
@@ -13,14 +12,13 @@ servers:
           name: index
           description: Index Page
           url: /
-  -
-    name: goolgle
-    domain: www.naver.com
+  google:
+    domain: www.google.com
     ssl: false
     description: Google Portal
     port: 80
     apis:
-      default: /
+      default: /deaddead
       details:
         -
           name: index
