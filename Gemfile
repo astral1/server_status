@@ -9,6 +9,7 @@ gem 'sinatra'
 gem 'slim'
 gem 'thin'
 gem 'settingslogic'
+gem 'rest-client'
 
 group :development do
   gem "rspec"
