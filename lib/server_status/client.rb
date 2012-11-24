@@ -1,4 +1,6 @@
 require 'rest-client'
+require 'socket'
+require 'timeout'
 
 class ServerStatusClient
   def initialize hash
@@ -14,5 +16,19 @@ class ServerStatusClient
     response.code
   rescue => e
     e.response.code
+  end
+
+  def is_port_open?
+    Timeout::timeout(1) do
+      begin
+        s = TCPSocket.new(@domain, @port)
+        s.close
+        return true
+      rescue Errno::ECONNREFUSED, Errno::EHOSTUNREACH
+        return false
+      end
+    end
+  rescue Timeout::Error
+    return false
   end
 end
