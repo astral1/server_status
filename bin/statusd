@@ -1,10 +1,32 @@
 #!/usr/bin/env ruby
-if ARGV.length < 1
-  puts 'usage: statusd <config file>'
+if ARGV.length < 2
+  puts "usage: #{File.basename __FILE__} (run|start|stop) <path_to_config_file>"
   exit 1
 end
 
 require 'server_status'
+require 'daemons'
 
-set_config ARGV[0]
-ServerStatusApp.run!
+set_config ARGV[1]
+
+conf_name = File.expand_path ARGV[1]
+pid_name = "#{File.basename __FILE__}.pid"
+pid_path = pid_name
+
+case ARGV[0]
+when 'run'
+  ServerStatusApp.run!
+when 'start'
+  Daemons.daemonize app_name: "#{File.basename __FILE__}"
+  ServerStatusApp.run!
+when 'stop'
+  pid = 0
+  File.open("#{pid_path}", 'r') do |file|
+    pid = file.read.to_i
+  end
+  if pid != 0
+    Process.kill('SIGINT', pid)
+  end
+else
+  puts "usage: #{File.basename __FILE__} (run|start|stop) <path_to_config_file>"
+end

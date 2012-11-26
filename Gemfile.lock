@@ -49,6 +49,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler
+  daemons
   jeweler
   rdoc
   rest-client
