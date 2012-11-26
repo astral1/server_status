@@ -1,24 +1,31 @@
 port: 4568
 servers:
-  naver:
-    domain: www.naver.com
-    ssl: false
-    description: Naver Portal
-    port: 80
-    apis:
-      default: /
-      details:
-        index:
-          description: Index Page
-          url: /
   google:
+    protocol: http
     domain: www.google.com
     ssl: false
     description: Google Portal
     port: 80
     apis:
-      default: /deaddead
+      default:
+        url: /deaddead
       details:
         index:
           description: Index Page
           url: /
+  test:
+    protocol: http
+    domain: localhost
+    ssl: false
+    description: Test Dummy
+    port: 4567
+    apis:
+      default:
+        url: /
+        payload:
+          header:
+            content_type: application/json
+          params:
+            query: TEST
+          encode: json
+          method: get

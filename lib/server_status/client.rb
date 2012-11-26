@@ -9,12 +9,21 @@ class ServerStatusClient
     @scheme = hash[:ssl.to_s] ? 'https' : 'http'
     @url = "#@scheme://#@domain:#@port"
     @default = hash[:apis.to_s][:default.to_s]
+    @payload = @default[:payload.to_s]
+    @payload ||= {}
   end
 
   def request
+    header, method, params = parse_params
     Timeout::timeout(5) do
       begin
-        response = RestClient.get "#@url#@default"
+        case method 
+        when :get
+          header[:params] = params
+          response = RestClient.get "#@url#{@default[:url.to_s]}", header
+        when :post
+          response = RestClient.post "#@url#{@default[:url.to_s]}", params.to_json, header
+        end
         response.code
       rescue => e
         e.response.code
@@ -22,6 +31,22 @@ class ServerStatusClient
     end
   rescue Timeout::Error
     return 408
+  end
+
+  def parse_params
+    header = {}
+    method = :get
+    params = {}
+    if @payload.has_key? :header.to_s
+      header = @payload[:header.to_s]
+    end
+    if @payload.has_key? :method.to_s
+      method = @payload[:method.to_s].downcase.to_sym
+    end
+    if @payload.has_key? :params.to_s
+      params = @payload[:params.to_s]
+    end
+    [header, method, params]
   end
 
   #noinspection RubyResolve
@@ -38,4 +63,6 @@ class ServerStatusClient
   rescue Timeout::Error
     return false
   end
+
+  private :parse_params
 end
