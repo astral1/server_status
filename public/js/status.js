@@ -86,5 +86,5 @@
     serverView.update();
     setInterval(function () {
         serverView.update();
-    }, 3000);
+    }, window.server_status.refresh_rate);
 })(jQuery);

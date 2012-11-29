@@ -11,6 +11,7 @@ gem 'thin'
 gem 'settingslogic'
 gem 'rest-client'
 gem 'daemons'
+gem 'coffee-script'
 
 group :development do
   gem "rspec"

@@ -38,6 +38,7 @@ API
 ----
 ```yaml
 port: 4568
+refresh: 3000
 servers:
   google:
     protocol: http

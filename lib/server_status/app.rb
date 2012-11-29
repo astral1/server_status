@@ -16,6 +16,8 @@ class ServerStatusApp < Sinatra::Base
       ServerStatusApp.check server
     end
 
+    @refresh = ServerStatusConfig.refresh
+
     slim :index
   end
 
