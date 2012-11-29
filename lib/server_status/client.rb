@@ -25,6 +25,8 @@ class ServerStatusClient
           response = RestClient.post "#@url#{@default[:url.to_s]}", params.to_json, header
         end
         response.code
+      rescue Errno::ECONNREFUSED, Errno::EHOSTUNREACH
+        return 503
       rescue => e
         e.response.code
       end

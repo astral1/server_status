@@ -10,6 +10,7 @@ gem 'slim'
 gem 'thin'
 gem 'settingslogic'
 gem 'rest-client'
+gem 'daemons'
 
 group :development do
   gem "rspec"

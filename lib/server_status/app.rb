@@ -20,7 +20,12 @@ class ServerStatusApp < Sinatra::Base
   end
 
   get '/servers' do
-    ServerStatusConfig.servers.keys.to_json
+    result = []
+    ServerStatusConfig.servers.each do |k, v|
+      result.push({name: k, description: v[:description.to_s]})
+    end
+
+    result.to_json
   end
 
   get '/:server/status' do
