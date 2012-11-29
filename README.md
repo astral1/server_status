@@ -9,8 +9,19 @@ Server Status
 ----
 ```bash
 gem install server_status
-statusd <path to config file>
+statusd run <path to config file>
 ```
+데몬으로 실행하고 싶을 때
+```bash
+gem install server_status
+statusd start <path to config file>
+```
+데몬을 멈추고 싶을 때
+```bash
+gem install server_status
+statusd stop <path to config file>
+```
+현재는 start와 stop을 동일한 work directory에서만 실행하여야 함.
 
 API
 ---
